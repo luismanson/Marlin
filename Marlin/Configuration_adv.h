@@ -35,7 +35,7 @@
 // you exit the value by any M109 without F*
 // Also, if the temperature is set to a value <mintemp, it is not changed by autotemp.
 // on an Ultimaker, some initial testing worked with M109 S215 B260 F1 in the start.gcode
-#define AUTOTEMP
+//#define AUTOTEMP
 #ifdef AUTOTEMP
   #define AUTOTEMP_OLDWEIGHT 0.98
 #endif
@@ -201,6 +201,9 @@
 // This is the default power-up mode which can be later using M605.
 #define DEFAULT_DUAL_X_CARRIAGE_MODE 0
 
+// As the x-carriages are independent we can now account for any relative Z offset
+#define EXTRUDER1_Z_OFFSET 0.0           // z offset relative to extruder 0
+
 // Default settings in "Auto-park Mode"
 #define TOOLCHANGE_PARK_ZLIFT   0.2      // the distance to raise Z axis when parking an extruder
 #define TOOLCHANGE_UNPARK_ZLIFT 1        // the distance to raise Z axis when unparking an extruder
@@ -214,7 +217,7 @@
 #define X_HOME_RETRACT_MM 5
 #define Y_HOME_RETRACT_MM 5
 #define Z_HOME_RETRACT_MM 2
-//#define QUICK_HOME  //if this is defined, if both x and y are to be homed, a diagonal move will be performed initially.
+#define QUICK_HOME  //if this is defined, if both x and y are to be homed, a diagonal move will be performed initially.
 
 #define AXIS_RELATIVE_MODES {false, false, false, false}
 #ifdef CONFIG_STEPPERS_TOSHIBA
@@ -296,15 +299,15 @@
 //#define MENU_ADDAUTOSTART
 
 // Show a progress bar on HD44780 LCDs for SD printing
-//#define LCD_PROGRESS_BAR
+#define LCD_PROGRESS_BAR
 
 #ifdef LCD_PROGRESS_BAR
   // Amount of time (ms) to show the bar
   #define PROGRESS_BAR_BAR_TIME 2000
   // Amount of time (ms) to show the status message
-  #define PROGRESS_BAR_MSG_TIME 3000
+  #define PROGRESS_BAR_MSG_TIME 5000
   // Amount of time (ms) to retain the status message (0=forever)
-  #define PROGRESS_MSG_EXPIRE   0
+  #define PROGRESS_MSG_EXPIRE   3000
   // Enable this to show messages for MSG_TIME then hide them
   //#define PROGRESS_MSG_ONCE
   #ifdef DOGLCD
@@ -316,7 +319,7 @@
 #endif
 
 // The hardware watchdog should reset the microcontroller disabling all outputs, in case the firmware gets stuck and doesn't do temperature regulation.
-//#define USE_WATCHDOG
+#define USE_WATCHDOG
 
 #ifdef USE_WATCHDOG
 // If you have a watchdog reboot in an ArduinoMega2560 then the device will hang forever, as a watchdog reset will leave the watchdog on.
@@ -326,12 +329,12 @@
 #endif
 
 // Enable the option to stop SD printing when hitting and endstops, needs to be enabled from the LCD menu when this option is enabled.
-//#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
+#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
 
 // Babystepping enables the user to control the axis in tiny amounts, independently from the normal printing process
 // it can e.g. be used to change z-positions in the print startup phase in real-time
 // does not respect endstops!
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #ifdef BABYSTEPPING
   #define BABYSTEP_XY  //not only z, but also XY in the menu. more clutter, more functions
   #define BABYSTEP_INVERT_Z false  //true for inverse movements in Z
